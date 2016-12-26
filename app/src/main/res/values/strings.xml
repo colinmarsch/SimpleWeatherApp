@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SimpleWeatherApp</string>
+    <string name="city_name">Waterloo</string>
+    <string name="change_city">Change City?</string>
+    <string name="temperature">0°</string>
+    <string name="details">Sunny</string>
+</resources>
