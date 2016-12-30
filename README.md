@@ -1,5 +1,5 @@
 # SimpleWeatherApp
 
 # TODO
-* Add button to refresh data
-* Grab image that represents the current weather and display it
+* Find a better way to get a weather icon so it isn't blurry
+* Implement change city functionality

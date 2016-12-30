@@ -16,14 +16,14 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.25">
-        
+        android:layout_weight="0.15">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/degrees"
             android:gravity="center"
-            android:textSize="65sp"
+            android:textSize="40sp"
             android:textColor="#FF5722"
             android:text="@string/city_name"/>
 
@@ -46,6 +46,7 @@
 
         <ImageView
             android:id="@+id/main_bg"
+            android:contentDescription="@string/img_desc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
@@ -76,5 +77,19 @@
             android:textColor="#FF5722"
             android:text="@string/details"/>
         
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="0.10">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/btn"
+            android:id="@+id/refresh"/>
+
     </LinearLayout>
 </LinearLayout>

@@ -4,4 +4,6 @@
     <string name="change_city">Change City?</string>
     <string name="temperature">0°</string>
     <string name="details">Sunny</string>
+    <string name="btn">Refresh</string>
+    <string name="img_desc">Icon displaying the current weather</string>
 </resources>
