@@ -6,4 +6,5 @@
     <string name="details">Sunny</string>
     <string name="btn">Refresh</string>
     <string name="img_desc">Icon displaying the current weather</string>
+    <string name="search_hint">Search a City</string>
 </resources>

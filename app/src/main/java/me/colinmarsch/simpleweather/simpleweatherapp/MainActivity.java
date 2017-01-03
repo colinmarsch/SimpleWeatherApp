@@ -1,5 +1,6 @@
 package me.colinmarsch.simpleweather.simpleweatherapp;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +24,7 @@ import static android.R.attr.data;
 
 public class MainActivity extends AppCompatActivity {
 
-    public TextView mTxtTemperature, mTxtDetails;
+    public TextView mTxtTemperature, mTxtDetails, mChange;
     public ImageView mImgView;
     Weather helper = Weather.getInstance();
     private final static String API_ENDPOINT = "http://api.openweathermap.org/data/2.5/weather?units=metric";
@@ -41,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 loadData();
+            }
+        });
+        mChange.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
             }
         });
         loadData();
