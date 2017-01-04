@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         mTxtDetails = (TextView) findViewById(R.id.details);
         mImgView = (ImageView) findViewById(R.id.main_bg);
         mTxtTemperature = (TextView) findViewById(R.id.temp);
+        mChange = (TextView) findViewById(R.id.change_city);
         final Button button = (Button) findViewById(R.id.refresh);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
