@@ -18,6 +18,7 @@
         android:padding="15dp"
         android:id="@+id/autocomplete_city"
         android:background="#ffffff"
+        android:imeOptions="actionSend"
         android:hint="@string/change_city" />
 
 </LinearLayout>

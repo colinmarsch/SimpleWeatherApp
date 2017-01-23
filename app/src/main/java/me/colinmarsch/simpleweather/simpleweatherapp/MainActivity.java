@@ -1,5 +1,6 @@
 package me.colinmarsch.simpleweather.simpleweatherapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public ImageView mImgView;
     Weather helper = Weather.getInstance();
     private final static String API_ENDPOINT = "http://api.openweathermap.org/data/2.5/weather?units=metric";
-    private final static String APIKEY = "YOUR_API_KEY";
+    private final static String APIKEY = "0f9cfc3727985ab2180dc4cbe36b3446";
     private String city = "Waterloo,ON";
 
     @Override
@@ -48,11 +49,27 @@ public class MainActivity extends AppCompatActivity {
         mChange.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
         });
         loadData();
     }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (2) : {
+                if (resultCode == Activity.RESULT_OK) {
+                    city = data.getStringExtra("city");
+                }
+                break;
+            }
+        }
+    }
+
+
     private void loadData() {
         String url = API_ENDPOINT + "&q=" + city + "&appid=" + APIKEY;
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
