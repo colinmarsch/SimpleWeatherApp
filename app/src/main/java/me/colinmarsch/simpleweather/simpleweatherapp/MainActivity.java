@@ -25,7 +25,7 @@ import static android.R.attr.data;
 
 public class MainActivity extends AppCompatActivity {
 
-    public TextView mTxtTemperature, mTxtDetails, mChange;
+    public TextView mTxtTemperature, mTxtDetails, mChange, mCityName;
     public ImageView mImgView;
     Weather helper = Weather.getInstance();
     private final static String API_ENDPOINT = "http://api.openweathermap.org/data/2.5/weather?units=metric";
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mTxtDetails = (TextView) findViewById(R.id.details);
         mImgView = (ImageView) findViewById(R.id.main_bg);
+        mCityName = (TextView) findViewById(R.id.city_name);
         mTxtTemperature = (TextView) findViewById(R.id.temp);
         mChange = (TextView) findViewById(R.id.change_city);
         final Button button = (Button) findViewById(R.id.refresh);
@@ -62,7 +63,15 @@ public class MainActivity extends AppCompatActivity {
         switch(requestCode) {
             case (2) : {
                 if (resultCode == Activity.RESULT_OK) {
-                    city = data.getStringExtra("city");
+                    Bundle extras = data.getExtras();
+                    if(extras == null) {
+                        System.out.println("this ran");
+                        city = null;
+                    } else {
+                        city = (String) extras.get("city");
+                    }
+                    mCityName.setText(city);
+                    System.out.println(city);
                 }
                 break;
             }

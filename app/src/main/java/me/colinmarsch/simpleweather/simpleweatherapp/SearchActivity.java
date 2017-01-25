@@ -6,9 +6,12 @@ import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -23,33 +26,31 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
-    public AutoCompleteTextView mtextView;
+    public EditText mtextView;
+    public Button mSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        mtextView = (AutoCompleteTextView) findViewById(R.id.autocomplete_city);
-        //get the string array from the json file provided
-        AssetManager am = getApplicationContext().getAssets();
-        try {
-            //using the json and finding all the cities listed in it
-            ArrayList<org.json.simple.JSONObject> jsons = ReadJSON(am);
-            ArrayList<String> cities = new ArrayList<>();
-            for(org.json.simple.JSONObject obj : jsons) {
-                cities.add(obj.get("name") + "," + obj.get("country"));
+        mtextView = (EditText) findViewById(R.id.autocomplete_city);
+        mSearch = (Button) findViewById(R.id.search_btn);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent();
+                in.putExtra("city", mtextView.getText().toString());
+                setResult(Activity.RESULT_OK, in);
+                finish();
             }
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cities);
-            mtextView.setAdapter(adapter);
-        } catch (org.json.simple.parser.ParseException | IOException e) {
-            e.printStackTrace();
-        }
+        });
+
         mtextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 boolean handled = false;
-                if(i == EditorInfo.IME_ACTION_SEND) {
+                if(i == EditorInfo.IME_ACTION_DONE) {
                     Intent in = new Intent();
-                    in.putExtra("city", textView.getText());
+                    in.putExtra("city", textView.getText().toString());
                     setResult(Activity.RESULT_OK, in);
                     finish();
                     handled = true;
@@ -59,17 +60,5 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    public static synchronized ArrayList<org.json.simple.JSONObject> ReadJSON(AssetManager am)
-            throws org.json.simple.parser.ParseException, IOException {
-        InputStream is = am.open("city.list.json");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        String line;
-        ArrayList<org.json.simple.JSONObject> json = new ArrayList<>();
-        //parsing strings to json
-        while((line = reader.readLine()) != null) {
-            org.json.simple.JSONObject obj = (org.json.simple.JSONObject) new JSONParser().parse(line);
-            json.add(obj);
-        }
-        return json;
-    }
+
 }

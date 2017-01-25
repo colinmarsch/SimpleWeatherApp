@@ -12,13 +12,20 @@
     android:background="#212121"
     tools:context="me.colinmarsch.simpleweather.simpleweatherapp.SearchActivity">
 
-    <AutoCompleteTextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:id="@+id/autocomplete_city"
         android:background="#ffffff"
-        android:imeOptions="actionSend"
+        android:imeOptions="actionDone"
         android:hint="@string/change_city" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search"
+        android:id="@+id/search_btn"
+        android:layout_gravity="center"/>
 
 </LinearLayout>
