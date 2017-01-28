@@ -3,10 +3,8 @@ package me.colinmarsch.simpleweather.simpleweatherapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,11 +15,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static android.R.attr.data;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,9 +65,15 @@ public class MainActivity extends AppCompatActivity {
                         city = null;
                     } else {
                         city = (String) extras.get("city");
+                        if(city.contains(" ")){
+                            String[] parts = city.split(" ");
+                            city = "";
+                            for (String a : parts) {
+                                city += a;
+                            }
+                        }
                     }
-                    mCityName.setText(city);
-                    System.out.println(city);
+                    loadData();
                 }
                 break;
             }
@@ -87,10 +89,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            String uri = "@drawable/a" + response.getJSONArray("weather").getJSONObject(0).getString("icon");
+                            String uri = "@drawable/a"
+                                    + response.getJSONArray("weather").getJSONObject(0).getString("icon");
                             int imgRes = getResources().getIdentifier(uri, null, getPackageName());
                             Drawable res = getResources().getDrawable(imgRes, null);
                             mImgView.setImageDrawable(res);
+                            mCityName.setText(response.getString("name") + ", "
+                                    + response.getJSONObject("sys").getString("country"));
                             mTxtTemperature.setText(response.getJSONObject("main").getString("temp") + "°C");
                             mTxtDetails.setText(response.getJSONArray("weather").getJSONObject(0).getString("description"));
 
