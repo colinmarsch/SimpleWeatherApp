@@ -8,4 +8,6 @@
     <string name="img_desc">Icon displaying the current weather</string>
     <string name="search_hint">Search a City</string>
     <string name="search">Search</string>
+    <string name="location">Use Current Location</string>
+    <string name="error">Location permissions have been denied</string>
 </resources>
