@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#212121">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/city_name"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:textColor="#FF5722"
+            android:text="@string/city_name"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/change_city"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textColor="#FF5722"
+            android:text="@string/change_city"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.50">
+
+        <ImageView
+            android:id="@+id/main_bg"
+            android:contentDescription="@string/img_desc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.25">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/temp"
+            android:textAlignment="center"
+            android:textSize="55sp"
+            android:textColor="#FF5722"
+            android:text="@string/temperature"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/details"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textColor="#FF5722"
+            android:text="@string/details"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.10"
+        style="?android:attr/buttonBarButtonStyle">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/btn"
+            android:textColor="#FF5722"
+            style="?android:buttonBarButtonStyle"
+            android:background="?android:attr/selectableItemBackground"
+            android:id="@+id/refresh"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="#FF5722"
+            android:background="?android:attr/selectableItemBackground"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="@string/location"
+            android:id="@+id/getLocation"/>
+
+    </LinearLayout>
+
+</LinearLayout>
