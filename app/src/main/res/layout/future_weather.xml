@@ -12,4 +12,9 @@
     android:background="#212121"
     tools:context="me.colinmarsch.simpleweather.simpleweatherapp.SearchActivity">
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/future_forecast"/>
+
 </LinearLayout>
