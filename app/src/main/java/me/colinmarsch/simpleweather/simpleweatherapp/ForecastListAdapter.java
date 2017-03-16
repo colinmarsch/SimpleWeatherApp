@@ -33,7 +33,7 @@ public class ForecastListAdapter extends ArrayAdapter<String> {
 
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.forecast_list, parent, true);
+        View rowView = inflater.inflate(R.layout.forecast_list, null, true);
 
         ImageView img = (ImageView) rowView.findViewById(R.id.weather_icon);
         TextView day_of_week = (TextView) rowView.findViewById(R.id.day_of_week);
@@ -45,8 +45,8 @@ public class ForecastListAdapter extends ArrayAdapter<String> {
         img.setImageDrawable(res);
 
         day_of_week.setText("Monday");
-        date.setText("March, 11th");
-        high_low.setText("HI: 17°C, LO: -5°C");
+        date.setText(dates[position]);
+        high_low.setText("HI: " + highs[position] + "°C, LO: " + lows[position] + "°C");
 
         return rowView;
     }

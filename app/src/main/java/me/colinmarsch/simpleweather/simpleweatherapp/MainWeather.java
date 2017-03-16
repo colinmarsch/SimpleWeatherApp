@@ -41,7 +41,7 @@ public class MainWeather extends Fragment implements GoogleApiClient.ConnectionC
     public Location mCurrLocation;
     Weather helper = Weather.getInstance();
     private final static String API_ENDPOINT = "http://api.openweathermap.org/data/2.5/weather?units=metric";
-    private final static String APIKEY = "YOUR_API_KEY";
+    private final static String APIKEY = "0f9cfc3727985ab2180dc4cbe36b3446";
     private String city = "Waterloo,ON";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,6 +89,13 @@ public class MainWeather extends Fragment implements GoogleApiClient.ConnectionC
         return view;
     }
 
+    public void sendData() {
+        Intent dataIntent = new Intent();
+        dataIntent.setAction("me.colinmarsch.simpleweather.simpleweatherapp.DATA_BROADCAST");
+        dataIntent.putExtra("city", city);
+        getActivity().sendBroadcast(dataIntent);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -110,6 +117,7 @@ public class MainWeather extends Fragment implements GoogleApiClient.ConnectionC
                         }
                     }
                     loadData(API_ENDPOINT + "&q=" + city + "&appid=" + APIKEY);
+                    sendData();
                 }
                 break;
             }
@@ -132,6 +140,7 @@ public class MainWeather extends Fragment implements GoogleApiClient.ConnectionC
                             mCityName.setText(city);
                             mTxtTemperature.setText(response.getJSONObject("main").getString("temp") + "°C");
                             mTxtDetails.setText(response.getJSONArray("weather").getJSONObject(0).getString("description"));
+                            sendData();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
