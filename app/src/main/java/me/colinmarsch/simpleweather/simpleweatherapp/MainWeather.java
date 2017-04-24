@@ -73,8 +73,10 @@ public class MainWeather extends Fragment implements GoogleApiClient.ConnectionC
                     ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
                     onConnected(new Bundle());
                 } else {
-                    loadData(API_ENDPOINT + "&lat=" + mCurrLocation.getLatitude() +
-                            "&type=like" + "&lon=" + mCurrLocation.getLongitude() + "&appid=" + APIKEY);
+                    if(mCurrLocation != null) {
+                        loadData(API_ENDPOINT + "&lat=" + mCurrLocation.getLatitude() +
+                                "&type=like" + "&lon=" + mCurrLocation.getLongitude() + "&appid=" + APIKEY);
+                    }
                 }
             }
         });
