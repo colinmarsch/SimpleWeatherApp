@@ -24,8 +24,8 @@ public class MainActivity extends FragmentActivity {
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        mPager.setCurrentItem(1);
         tabLayout.setupWithViewPager(mPager);
-
     }
 
 
@@ -37,15 +37,16 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
         public Fragment getItem(int position) {
 
             switch(position) {
-                case 0: return new MainWeather();
-                case 1: return new FutureWeather();
+                case 0: return new SavedCities();
+                case 1: return new MainWeather();
+                case 2: return new FutureWeather();
                 default: return null;
             }
         }
@@ -53,8 +54,9 @@ public class MainActivity extends FragmentActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             switch(position) {
-                case 0: return getString(R.string.current_weather);
-                case 1: return getString(R.string.future_forecast);
+                case 0: return getString(R.string.saved_cities);
+                case 1: return getString(R.string.current_weather);
+                case 2: return getString(R.string.future_forecast);
                 default: return null;
             }
         }

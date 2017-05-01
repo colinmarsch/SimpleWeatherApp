@@ -12,4 +12,5 @@
     <string name="error">Location permissions have been denied</string>
     <string name="current_weather">Current</string>
     <string name="future_forecast">7 Day</string>
+    <string name="saved_cities">Saved Cities</string>
 </resources>
