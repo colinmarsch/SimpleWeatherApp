@@ -1,7 +1,9 @@
 package me.colinmarsch.simpleweather.simpleweatherapp;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import me.colinmarsch.simpleweather.simpleweatherapp.data.SavedCitiesContract.CitiesEntry;
+import me.colinmarsch.simpleweather.simpleweatherapp.data.SavedCitiesHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +27,8 @@ public class SavedCities extends Fragment {
     private Button add_city;
     private String[] cities;
     private List<String> citiesList;
-
+    private ContentValues values;
+    private SQLiteDatabase db;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +45,9 @@ public class SavedCities extends Fragment {
                 startActivityForResult(intent, 4);
             }
         });
+        SavedCitiesHelper mDbHelper = new SavedCitiesHelper(getActivity());
+        db = mDbHelper.getWritableDatabase();
+        values = new ContentValues();
         loadList(view);
         return view;
     }
@@ -62,6 +70,9 @@ public class SavedCities extends Fragment {
                     } else {
                         String city = (String) extras.get("city");
                         citiesList.add(city);
+                        values = new ContentValues();
+                        values.put(CitiesEntry.COLUMN_NAME_CITY, city);
+                        db.insert(CitiesEntry.TABLE_NAME, null, values);
                     }
                     cities = citiesList.toArray(new String[citiesList.size()]);
                     loadList(getView());
