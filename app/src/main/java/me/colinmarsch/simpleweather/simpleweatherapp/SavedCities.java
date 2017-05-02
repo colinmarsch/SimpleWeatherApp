@@ -3,6 +3,7 @@ package me.colinmarsch.simpleweather.simpleweatherapp;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -53,6 +54,8 @@ public class SavedCities extends Fragment {
     }
 
     private void loadList(View view) {
+        String[] projection = {CitiesEntry.COLUMN_NAME_CITY};
+        Cursor c = db.query(CitiesEntry.TABLE_NAME, projection, null, null, null, null, null);
         CityListAdapter adapter= new CityListAdapter(getActivity(), cities);
         ListView list = (ListView) view.findViewById(R.id.cities_listView);
         list.setAdapter(adapter);
