@@ -1,9 +1,8 @@
 # SimpleWeatherApp
 
 # TODO
-* Find a better way to get a weather icon so it isn't blurry
 * Implement functioning autocomplete on the city search activity
-* Better design the 7 day forecast page
-* Add city title and refresh/my location buttons on the forecast tab
-* Fix name of current location showing up as "City Centre" (only happened in WPG) 
+* Add city title on the forecast tab
 * UI upgrades
+* Add weather icon and current temp on city list page
+* Click on city names in city list to set that to be your current city
