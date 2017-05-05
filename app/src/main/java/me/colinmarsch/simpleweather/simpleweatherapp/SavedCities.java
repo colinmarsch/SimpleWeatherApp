@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import me.colinmarsch.simpleweather.simpleweatherapp.data.SavedCitiesContract.CitiesEntry;
@@ -54,11 +53,18 @@ public class SavedCities extends Fragment {
     }
 
     private void loadList(View view) {
-        String[] projection = {CitiesEntry.COLUMN_NAME_CITY};
+        String[] projection = new String[]{CitiesEntry.COLUMN_NAME_CITY};
         Cursor c = db.query(CitiesEntry.TABLE_NAME, projection, null, null, null, null, null);
+        int columnIndex = c.getColumnIndex(CitiesEntry.COLUMN_NAME_CITY);
+        citiesList.clear();
+        while(c.moveToNext()) {
+            citiesList.add(c.getString(columnIndex));
+        }
+        cities = citiesList.toArray(new String[citiesList.size()]);
         CityListAdapter adapter= new CityListAdapter(getActivity(), cities);
         ListView list = (ListView) view.findViewById(R.id.cities_listView);
         list.setAdapter(adapter);
+        c.close();
     }
 
     @Override
@@ -72,12 +78,10 @@ public class SavedCities extends Fragment {
                         System.out.println("this ran");
                     } else {
                         String city = (String) extras.get("city");
-                        citiesList.add(city);
                         values = new ContentValues();
                         values.put(CitiesEntry.COLUMN_NAME_CITY, city);
                         db.insert(CitiesEntry.TABLE_NAME, null, values);
                     }
-                    cities = citiesList.toArray(new String[citiesList.size()]);
                     loadList(getView());
                 }
                 break;

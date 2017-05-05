@@ -12,7 +12,7 @@ import me.colinmarsch.simpleweather.simpleweatherapp.data.SavedCitiesContract.Ci
 
 public class SavedCitiesHelper extends SQLiteOpenHelper{
 
-    private static final String DATABASE_NAME = "cities.db";
+    private static final String DATABASE_NAME = "cities2.db";
     private static final int DATABASE_VERSION = 1;
 
     public SavedCitiesHelper(Context context) {
@@ -22,9 +22,10 @@ public class SavedCitiesHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL_CREATE_CITIES_TABLE = "CREATE TABLE " + CitiesEntry.TABLE_NAME + " (" +
-                                        CitiesEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                                        CitiesEntry.COLUMN_NAME_CITY + "TEXT NOT NULL);";
+        String SQL_CREATE_CITIES_TABLE = "CREATE TABLE " + CitiesEntry.TABLE_NAME + " ( " +
+                                        CitiesEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
+                                        CitiesEntry.COLUMN_NAME_CITY + " TEXT NOT NULL );";
+        System.out.println(SQL_CREATE_CITIES_TABLE);
         db.execSQL(SQL_CREATE_CITIES_TABLE);
     }
 

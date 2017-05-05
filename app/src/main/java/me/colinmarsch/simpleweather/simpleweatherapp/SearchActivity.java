@@ -27,7 +27,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent in = new Intent();
-                in.putExtra("city", mtextView.getText().toString());
+                in.putExtra("city", mtextView.getText().toString().trim());
                 setResult(Activity.RESULT_OK, in);
                 finish();
             }
@@ -39,7 +39,7 @@ public class SearchActivity extends AppCompatActivity {
                 boolean handled = false;
                 if(i == EditorInfo.IME_ACTION_DONE) {
                     Intent in = new Intent();
-                    in.putExtra("city", textView.getText().toString());
+                    in.putExtra("city", textView.getText().toString().trim());
                     setResult(Activity.RESULT_OK, in);
                     finish();
                     handled = true;
