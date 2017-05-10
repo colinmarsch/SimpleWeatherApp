@@ -136,7 +136,6 @@ public class MainWeather extends Fragment implements GoogleApiClient.ConnectionC
                         }
                     }
                     loadData(API_ENDPOINT + "&q=" + city + "&appid=" + APIKEY);
-                    sendData();
                 }
                 break;
             }
