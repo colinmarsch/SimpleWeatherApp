@@ -2,7 +2,10 @@ package me.colinmarsch.simpleweather.simpleweatherapp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -88,8 +91,22 @@ public class MainWeather extends Fragment implements GoogleApiClient.ConnectionC
         });
         loadData(API_ENDPOINT + "&q=" + city + "&appid=" + APIKEY);
 
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("me.colinmarsch.simpleweather.simpleweatherapp.DATA_BROADCAST2");
+        getActivity().registerReceiver(receiver, filter);
+
         return view;
     }
+
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            city = intent.getStringExtra("city");
+            String url = API_ENDPOINT + "&q=" + city + "&appid=" + APIKEY;
+            System.out.println(city);
+            loadData(url);
+        }
+    };
 
     public void sendData() {
         Intent dataIntent = new Intent();

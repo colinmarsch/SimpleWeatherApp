@@ -28,7 +28,6 @@ public class MainActivity extends FragmentActivity {
         tabLayout.setupWithViewPager(mPager);
     }
 
-
     public class MyAdapter extends FragmentPagerAdapter {
 
         public MyAdapter(FragmentManager fm) {

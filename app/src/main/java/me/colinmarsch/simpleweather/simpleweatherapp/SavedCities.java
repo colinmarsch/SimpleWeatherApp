@@ -6,12 +6,16 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import me.colinmarsch.simpleweather.simpleweatherapp.data.SavedCitiesContract.CitiesEntry;
 import me.colinmarsch.simpleweather.simpleweatherapp.data.SavedCitiesHelper;
 
@@ -29,6 +33,8 @@ public class SavedCities extends Fragment {
     private List<String> citiesList;
     private ContentValues values;
     private SQLiteDatabase db;
+    private ListView list;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,18 @@ public class SavedCities extends Fragment {
         db = mDbHelper.getWritableDatabase();
         values = new ContentValues();
         loadList(view);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView city_selected = (TextView) list.getAdapter().getView(position, null, list).findViewById(R.id.city_name);
+                String city = city_selected.getText().toString();
+                Intent dataIntent = new Intent();
+                dataIntent.setAction("me.colinmarsch.simpleweather.simpleweatherapp.DATA_BROADCAST2");
+                dataIntent.putExtra("city", city);
+                getActivity().sendBroadcast(dataIntent);
+                Snackbar.make(view, "Set the city to " + city, Snackbar.LENGTH_LONG).show();
+            }
+        });
         return view;
     }
 
@@ -62,7 +80,7 @@ public class SavedCities extends Fragment {
         }
         cities = citiesList.toArray(new String[citiesList.size()]);
         CityListAdapter adapter= new CityListAdapter(getActivity(), cities);
-        ListView list = (ListView) view.findViewById(R.id.cities_listView);
+        list = (ListView) view.findViewById(R.id.cities_listView);
         list.setAdapter(adapter);
         c.close();
     }
