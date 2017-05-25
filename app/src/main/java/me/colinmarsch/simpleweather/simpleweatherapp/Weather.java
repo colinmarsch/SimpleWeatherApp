@@ -1,6 +1,8 @@
 package me.colinmarsch.simpleweather.simpleweatherapp;
 
 import android.app.Application;
+import android.content.ContentValues;
+import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,24 +15,30 @@ import static com.android.volley.VolleyLog.TAG;
  * Created by colinmarsch on 2016-12-26.
  */
 
-public class Weather extends Application{
+public class Weather {
 
     private RequestQueue mRequestQueue;
     private static Weather mInstance;
-    public static final String TAG = Weather.class.getName();
+    private static Context mContxt;
+    private static final String TAG = Weather.class.getName();
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        mInstance = this;
-        mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+    private Weather(Context context) {
+        mContxt = context;
+        mRequestQueue = getRequestQueue();
     }
 
-    public static synchronized Weather getInstance() {
+    public static synchronized Weather getInstance(Context context) {
+        if(mInstance == null) {
+            mInstance = new Weather(context);
+        }
         return mInstance;
     }
 
     public RequestQueue getRequestQueue() {
+        if(mRequestQueue == null) {
+            // getApplicationContext() here stops the potential leaking of Activity or BroadcastReceiver
+            mRequestQueue = Volley.newRequestQueue(mContxt.getApplicationContext());
+        }
         return mRequestQueue;
     }
 

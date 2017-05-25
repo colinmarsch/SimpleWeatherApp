@@ -35,7 +35,7 @@ public class FutureWeather extends Fragment {
     private String[] imgId;
     private final static String API_ENDPOINT = "http://api.openweathermap.org/data/2.5/forecast/daily?units=metric&cnt=7";
     private final static String APIKEY = "0f9cfc3727985ab2180dc4cbe36b3446";
-    Weather helper = Weather.getInstance();
+    Weather helper;
     private String city;
 
     @Override
@@ -90,6 +90,8 @@ public class FutureWeather extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.future_weather, container, false);
+
+        helper = Weather.getInstance(getActivity().getApplicationContext());
 
         dates = new String[7];
         lows = new String[7];

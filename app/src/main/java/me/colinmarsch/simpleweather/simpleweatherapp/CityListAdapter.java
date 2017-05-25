@@ -37,13 +37,19 @@ public class CityListAdapter extends ArrayAdapter<String> {
         TextView city_name = (TextView) rowView.findViewById(R.id.city_name);
         city_name.setText(cities[position]);
 
-        int imgRes = context.getResources().getIdentifier(imgID[position], null, getContext().getPackageName());
-        Drawable res = context.getResources().getDrawable(imgRes, null);
-        ImageView mIcon = (ImageView) rowView.findViewById(R.id.current_city_icon);
-        mIcon.setImageDrawable(res);
+        if(imgID[position] != null){
+            int imgRes = context.getResources().getIdentifier(imgID[position], null, getContext().getPackageName());
+            Drawable res = context.getResources().getDrawable(imgRes, null);
+            ImageView mIcon = (ImageView) rowView.findViewById(R.id.current_city_icon);
+            mIcon.setImageDrawable(res);
+        }
 
         TextView currTemp = (TextView) rowView.findViewById(R.id.temperature);
-        currTemp.setText(temps[position]);
+        if(temps[position] != null) {
+            currTemp.setText(temps[position]);
+        } else {
+            currTemp.setText("...");
+        }
 
         return rowView;
     }

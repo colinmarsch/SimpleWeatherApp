@@ -11,11 +11,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#212121">
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add a City"
-        android:id="@+id/add_city"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Refresh List"
+            android:id="@+id/refresh_list"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Add a City"
+            android:id="@+id/add_city"/>
+
+    </LinearLayout>
+
 
     <ListView
         android:layout_width="match_parent"

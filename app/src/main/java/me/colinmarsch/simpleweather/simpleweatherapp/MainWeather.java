@@ -42,7 +42,7 @@ public class MainWeather extends Fragment implements GoogleApiClient.ConnectionC
     public ImageView mImgView;
     public GoogleApiClient mApiClient;
     public Location mCurrLocation;
-    Weather helper = Weather.getInstance();
+    Weather helper;
     private final static String API_ENDPOINT = "http://api.openweathermap.org/data/2.5/weather?units=metric";
     private final static String APIKEY = "0f9cfc3727985ab2180dc4cbe36b3446";
     private String city = "Waterloo,ON";
@@ -50,6 +50,8 @@ public class MainWeather extends Fragment implements GoogleApiClient.ConnectionC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.main_weather, container, false);
+
+        helper = Weather.getInstance(getActivity().getApplicationContext());
 
         if(mApiClient == null) {
             mApiClient = new GoogleApiClient.Builder(getContext())

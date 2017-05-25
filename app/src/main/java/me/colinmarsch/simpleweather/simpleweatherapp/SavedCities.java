@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.attr.data;
+import static me.colinmarsch.simpleweather.simpleweatherapp.R.id.refresh;
 import static me.colinmarsch.simpleweather.simpleweatherapp.R.string.error;
 
 /**
@@ -47,10 +48,11 @@ public class SavedCities extends Fragment {
     private ListView list;
     private String[] imgID;
     private String[] temps;
+    private Button refresh_list;
     private View view;
     private final static String API_ENDPOINT = "http://api.openweathermap.org/data/2.5/weather?units=metric";
     private final static String APIKEY = "0f9cfc3727985ab2180dc4cbe36b3446";
-    Weather helper = Weather.getInstance();
+    Weather helper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class SavedCities extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.cities_layout, container, false);
+        helper = Weather.getInstance(getActivity().getApplicationContext());
         citiesList = new ArrayList<String>();
         cities = citiesList.toArray(new String[citiesList.size()]);
         add_city = (Button) view.findViewById(R.id.add_city);
@@ -66,6 +69,12 @@ public class SavedCities extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), AddCity.class);
                 startActivityForResult(intent, 4);
+            }
+        });
+        refresh_list = (Button) view.findViewById(R.id.refresh_list);
+        refresh_list.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                loadList(view);
             }
         });
         SavedCitiesHelper mDbHelper = new SavedCitiesHelper(getActivity());
@@ -99,7 +108,6 @@ public class SavedCities extends Fragment {
         temps = new String[citiesList.size()];
         for(String city : citiesList) {
             final int i = citiesList.indexOf(city);
-            System.out.println("this ran here");
             String url = API_ENDPOINT + "&q=" + city + "&appid=" + APIKEY;
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                     (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -111,7 +119,7 @@ public class SavedCities extends Fragment {
                                 imgID[i] = uri;
                                 String temp = response.getJSONObject("main").getString("temp") + "°C";
                                 temps[i] = temp;
-                                CityListAdapter adapter= new CityListAdapter(getActivity(), cities, imgID, temps);
+                                CityListAdapter adapter = new CityListAdapter(getActivity(), cities, imgID, temps);
                                 list.setAdapter(adapter);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -138,7 +146,7 @@ public class SavedCities extends Fragment {
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle extras = data.getExtras();
                     if (extras == null) {
-                        System.out.println("this ran");
+
                     } else {
                         String city = (String) extras.get("city");
                         values = new ContentValues();
