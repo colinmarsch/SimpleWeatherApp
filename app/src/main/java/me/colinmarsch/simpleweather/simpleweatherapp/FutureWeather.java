@@ -22,6 +22,8 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import me.colinmarsch.simpleweather.simpleweatherapp.adapter.ForecastListAdapter;
+
 /**
  * Created by colinmarsch on 2017-02-22.
  */

@@ -8,7 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,15 +27,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import me.colinmarsch.simpleweather.simpleweatherapp.data.SavedCitiesContract.CitiesEntry;
-import me.colinmarsch.simpleweather.simpleweatherapp.data.SavedCitiesHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.R.attr.data;
-import static me.colinmarsch.simpleweather.simpleweatherapp.R.id.refresh;
-import static me.colinmarsch.simpleweather.simpleweatherapp.R.string.error;
+import me.colinmarsch.simpleweather.simpleweatherapp.adapter.CityListAdapter;
+import me.colinmarsch.simpleweather.simpleweatherapp.data.SavedCitiesContract.CitiesEntry;
+import me.colinmarsch.simpleweather.simpleweatherapp.data.SavedCitiesHelper;
 
 /**
  * Created by colinmarsch on 2017-05-01.
@@ -135,7 +135,33 @@ public class SavedCities extends Fragment {
         }
         cities = citiesList.toArray(new String[citiesList.size()]);
         list = (ListView) view.findViewById(R.id.cities_listView);
+        registerForContextMenu(list);
         c.close();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.cities_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        String city = (String) list.getItemAtPosition(info.position);
+        switch (item.getItemId()) {
+            case R.id.removeMenuButton:
+                return removeCity(city);
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    public boolean removeCity(String city) {
+        db.delete(CitiesEntry.TABLE_NAME, CitiesEntry.COLUMN_NAME_CITY + "=?", new String[]{city});
+        loadList(getView());
+        return true;
     }
 
     @Override

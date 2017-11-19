@@ -1,4 +1,4 @@
-package me.colinmarsch.simpleweather.simpleweatherapp;
+package me.colinmarsch.simpleweather.simpleweatherapp.adapter;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import me.colinmarsch.simpleweather.simpleweatherapp.R;
 
 /**
  * Created by colinmarsch on 2017-03-11.
