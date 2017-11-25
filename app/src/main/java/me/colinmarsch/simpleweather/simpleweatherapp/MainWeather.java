@@ -45,7 +45,7 @@ public class MainWeather extends Fragment implements GoogleApiClient.ConnectionC
     Weather helper;
     private final static String API_ENDPOINT = "http://api.openweathermap.org/data/2.5/weather?units=metric";
     private final static String APIKEY = "0f9cfc3727985ab2180dc4cbe36b3446";
-    private String city = "Waterloo,ON";
+    private String city = "Waterloo";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
