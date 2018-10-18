@@ -14,10 +14,6 @@ import android.widget.TextView;
 
 import me.colinmarsch.simpleweather.simpleweatherapp.R;
 
-/**
- * Created by colinmarsch on 2017-03-11.
- */
-
 public class ForecastListAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
@@ -61,7 +57,7 @@ public class ForecastListAdapter extends ArrayAdapter<String> {
     }
 
     @SuppressWarnings("deprecation")
-    public static Spanned fromHtml(String source) {
+    private static Spanned fromHtml(String source) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
         } else {

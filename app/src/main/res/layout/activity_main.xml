@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:background="#212121"
-    tools:context="me.colinmarsch.simpleweather.simpleweatherapp.MainActivity">
+    tools:context="me.colinmarsch.simpleweather.simpleweatherapp.view.MainActivity">
 
     <android.support.design.widget.TabLayout
         android:layout_height="wrap_content"

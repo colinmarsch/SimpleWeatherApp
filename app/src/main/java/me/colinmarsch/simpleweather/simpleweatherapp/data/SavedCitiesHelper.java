@@ -6,11 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import me.colinmarsch.simpleweather.simpleweatherapp.data.SavedCitiesContract.CitiesEntry;
 
-/**
- * Created by colinmarsch on 2017-04-24.
- */
-
-public class SavedCitiesHelper extends SQLiteOpenHelper{
+public class SavedCitiesHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "cities2.db";
     private static final int DATABASE_VERSION = 1;

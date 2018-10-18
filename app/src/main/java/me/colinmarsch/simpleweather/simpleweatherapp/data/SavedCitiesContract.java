@@ -2,10 +2,6 @@ package me.colinmarsch.simpleweather.simpleweatherapp.data;
 
 import android.provider.BaseColumns;
 
-/**
- * Created by colinmarsch on 2017-04-24.
- */
-
 public final class SavedCitiesContract {
 
     private SavedCitiesContract() {}
